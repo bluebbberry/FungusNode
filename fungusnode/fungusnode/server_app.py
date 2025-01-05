@@ -4,6 +4,11 @@ from flwr.common import Context, ndarrays_to_parameters
 from flwr.server import ServerApp, ServerAppComponents, ServerConfig
 from flwr.server.strategy import FedAvg
 from fungusnode.task import Net, get_weights
+from .mastodon_client import MastodonClient
+from dotenv import load_dotenv, dotenv_values
+import os
+# loading variables from .env file
+load_dotenv()
 
 
 def server_fn(context: Context):
@@ -22,6 +27,15 @@ def server_fn(context: Context):
         min_available_clients=2,
         initial_parameters=parameters,
     )
+
+    mastodon_server = "https://mastodon.online"
+    access_token = os.getenv("ACCESS_TOKEN")
+
+    client = MastodonClient(mastodon_server, access_token)
+
+    status_text = "Hello, Mastodon! This is a test post using Python."
+    result = client.post_status(status_text)
+
     config = ServerConfig(num_rounds=num_rounds)
 
     return ServerAppComponents(strategy=strategy, config=config)
