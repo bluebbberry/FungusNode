@@ -9,6 +9,7 @@ from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 from torch.utils.data import DataLoader
 from torchvision.transforms import Compose, Normalize, ToTensor
+from .mastodon_client import MastodonClient
 
 
 class Net(nn.Module):
@@ -98,6 +99,9 @@ def test(net, testloader, device):
             correct += (torch.max(outputs.data, 1)[1] == labels).sum().item()
     accuracy = correct / len(testloader.dataset)
     loss = loss / len(testloader)
+    client = MastodonClient()
+    status_text = "Federated learning test-result. Loss: " + str(loss) + " - Accuracy: " + str(accuracy)
+    result = client.post_status(status_text)
     return loss, accuracy
 
 
