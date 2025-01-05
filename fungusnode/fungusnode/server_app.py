@@ -28,7 +28,7 @@ def server_fn(context: Context):
         initial_parameters=parameters,
     )
 
-    mastodon_server = "https://mastodon.online"
+    mastodon_server = os.getenv("MASTODON_SERVER")
     access_token = os.getenv("ACCESS_TOKEN")
 
     client = MastodonClient(mastodon_server, access_token)
