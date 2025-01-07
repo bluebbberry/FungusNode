@@ -12,6 +12,12 @@ Follow instructions under ``/fungusnode/README.md``.
 
 ## How to run
 
+Run the following commands (or execute `./run.bat`):
+
+```bash
+./venv/Scripts/activate
+```
+
 ```bash
 cd /fungusnode
 ```

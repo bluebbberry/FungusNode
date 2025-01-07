@@ -14,7 +14,7 @@ load_dotenv()
 
 def server_fn(context: Context):
     client = MastodonClient()
-    statuses = client.get_latest_statuses(os.getenv("MYCELIAL_TAG"))
+    statuses = client.get_latest_statuses(os.getenv("NUTRIAL_TAG"))
 
     fungusService = FungusService()
     num_rounds, fraction_fit = [None, None]
