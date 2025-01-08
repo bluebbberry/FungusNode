@@ -100,8 +100,8 @@ def test(net, testloader, device):
     accuracy = correct / len(testloader.dataset)
     loss = loss / len(testloader)
     client = MastodonClient()
-    status_text = "Federated learning test-result. Loss: " + str(loss) + " - Accuracy: " + str(accuracy)
-    result = client.post_status(status_text)
+    status_text = "SPORE Loss: " + str(loss) + " Accuracy: " + str(accuracy)
+    result = client.post_status_on_mycelial_hashtags(status_text)
     return loss, accuracy
 
 
