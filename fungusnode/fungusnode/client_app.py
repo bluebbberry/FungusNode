@@ -36,7 +36,7 @@ class FlowerClient(NumPyClient):
         set_weights(self.net, parameters)
         loss, accuracy = test(self.net, self.valloader, self.device)
         rdf_service = RdfService()
-        rdf_service.insert_data("loss: " + str(loss) + " accuracy: " + str(accuracy))
+        rdf_service.insert_loss_accuracy(1, loss, accuracy)
         return loss, len(self.valloader.dataset), {"accuracy": accuracy}
 
 
