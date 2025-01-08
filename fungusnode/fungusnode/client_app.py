@@ -5,6 +5,7 @@ import torch
 from flwr.client import ClientApp, NumPyClient
 from flwr.common import Context
 from fungusnode.task import Net, get_weights, load_data, set_weights, test, train
+from .rdf_service import RdfService
 
 
 # Define Flower Client and client_fn
@@ -34,6 +35,8 @@ class FlowerClient(NumPyClient):
     def evaluate(self, parameters, config):
         set_weights(self.net, parameters)
         loss, accuracy = test(self.net, self.valloader, self.device)
+        rdf_service = RdfService()
+        rdf_service.insert_data("loss: " + str(loss) + " accuracy: " + str(accuracy))
         return loss, len(self.valloader.dataset), {"accuracy": accuracy}
 
 
